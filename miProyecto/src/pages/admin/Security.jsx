@@ -8,9 +8,6 @@ import "@szhsin/react-menu/dist/transitions/slide.css";
 
 // ICONS
 
-import sensor from "../../assets/Views/SENSOR.png";
-import app from "../../assets/Views/App Movil.png";
-
 // ICONS REACT}
 import { MdOutlineSensors } from "react-icons/md";
 import { RiEdit2Line } from "react-icons/ri";
@@ -235,34 +232,145 @@ const Security = () => {
 
       {/* Cuerpo Login Sessions */}
 
-      <div className="flex flex-col h-[372.328px] mb-[32.5px] min-w-0 relative bg-secondary-100 rounded-xl">
-        <div className="items-stretch flex flex-wrap justify-between mb-0 min-h-[70px] py-[0px] px-[29.25px]">
+      <div className="flex flex-col h-[410px] mb-[32.5px] min-w-0 relative bg-secondary-100 rounded-xl">
+        <div className="items-stretch flex flex-wrap justify-between mb-0 min-h-[70px] py-[0px] px-[29.25px] border-gray-700/60 border-b-[1px]">
           <div className="items-center flex my-[6.5px] ml-0 mr-[6.5px] ">
             <h3 className="mb-0 mt-0 text-[17.55px] font-medium text-white">
-              Sesiones de inicio de sesión
+              Registros de inicio de sesión
             </h3>
           </div>
           <div className="items-center flex flex-wrap mx-0 my-[6.5px] ">
-            <div className="mb-[3.25px] mr-[13px] mt-[3.25px]">
-              <select
-                name=""
-                id=""
-                className="items-center not-sr-only h-[1px] mx-0 my-0 overflow-x-visible overflow-y-visible px-0 py-0 absolute w-[125px]"
-              >
-                <option value="1" selected data-select2-id="">
-                  1 Hora
-                </option>
-                <option value="2"></option>
-                <option value="3"></option>
-                <option value="4"></option>
-              </select>
-              <span></span>
-            </div>
-            <a href=""></a>
+            <a
+              href=""
+              className="block mb-[3.25px] mt-[3.25px] px-[14px] py-[8.15px] text-[12.32px] font-medium bg-secondary-900 rounded-lg hover:bg-secondary-900/60 transition-colors"
+            >
+              Ver todos
+            </a>
           </div>
         </div>
-        <hr className=" border-gray-700" />
-        <div></div>
+
+        <div className="basis-auto flex-grow flex-shrink overflow-x-auto">
+          <div className="block ">
+            <table className="mb-[13px] w-full ">
+              <thead className="border-gray-700/60 border-b-[1px] ">
+                <tr className="h-[49px] min-h-0 px-0 text-[14.95px] font-medium ">
+                  <th className="h-[49px] min-h-0 min-w-[250px] py-[13px] pl-[29.25px] pr-[9.75px] text-start">
+                    Localizacion
+                  </th>
+                  <th className="h-[49px] min-h-0 min-w-[100px] py-[13px]  px-[9.75px] text-start">
+                    Estado
+                  </th>
+                  <th className="h-[49px] min-h-0 min-w-[150px] py-[13px]  px-[9.75px] text-start">
+                    Dispositivo
+                  </th>
+                  <th className="h-[49px] min-h-0 min-w-[150px] py-[13px]  px-[9.75px] text-start">
+                    Dirección IP
+                  </th>
+                  <th className="h-[49px] min-h-0 min-w-[150px] py-[13px] pr-[29.25px] pl-[9.75px] text-start">
+                    Tiempo
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-grisOscuroCustom">
+                <tr className="h-[47.7812px] min-h-0 pl-0 border-gray-700/60 border-b-[1px]">
+                  <td className="py-[13px] pl-[29.25px] pr-[9.75px] text-[13px] font-medium">
+                    <a href="">USA(5)</a>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    <span className="items-center inline-flex px-[6.5px] py-[4.225px] text-[12.35px] font-semibold text-VerdeCustom bg-VerdeCustom/10 rounded-lg">
+                      OK
+                    </span>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    Chrome - Windows
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    236.125.56.78
+                  </td>
+                  <td className="py-[13px] pr-[29.25px] pl-[9.75px] text-[13px] font-medium">
+                    0 mins ago
+                  </td>
+                </tr>
+                <tr className="h-[47.7812px] min-h-0 pl-0 border-gray-700/60 border-b-[1px]">
+                  <td className="py-[13px] pl-[29.25px] pr-[9.75px] text-[13px] font-medium">
+                    <a href="">USA(5)</a>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    <span className="items-center inline-flex px-[6.5px] py-[4.225px] text-[12.35px] font-semibold text-VerdeCustom bg-VerdeCustom/10 rounded-lg">
+                      OK
+                    </span>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    Chrome - Windows
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    236.125.56.78
+                  </td>
+                  <td className="py-[13px] pr-[29.25px] pl-[9.75px] text-[13px] font-medium">
+                    1 mins ago
+                  </td>
+                </tr>
+                <tr className="h-[47.7812px] min-h-0 pl-0 border-gray-700/60 border-b-[1px]">
+                  <td className="py-[13px] pl-[29.25px] pr-[9.75px] text-[13px] font-medium">
+                    <a href="">USA(5)</a>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    <span className="items-center inline-flex px-[6.5px] py-[4.225px] text-[12.35px] font-semibold text-RojoCustom bg-RojoCustom/10 rounded-lg">
+                      ERR
+                    </span>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    Chrome - Windows
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    236.125.56.50
+                  </td>
+                  <td className="py-[13px] pr-[29.25px] pl-[9.75px] text-[13px] font-medium">
+                    10 mins ago
+                  </td>
+                </tr>
+                <tr className="h-[47.7812px] min-h-0 pl-0 border-gray-700/60 border-b-[1px]">
+                  <td className="py-[13px] pl-[29.25px] pr-[9.75px] text-[13px] font-medium">
+                    <a href="">USA(5)</a>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    <span className="items-center inline-flex px-[6.5px] py-[4.225px] text-[12.35px] font-semibold text-AmarilloCustom bg-AmarilloCustom/10 rounded-lg">
+                      WRN
+                    </span>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    Chrome - Windows
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    236.125.56.01
+                  </td>
+                  <td className="py-[13px] pr-[29.25px] pl-[9.75px] text-[13px] font-medium">
+                    23 mins ago
+                  </td>
+                </tr>
+                <tr className="h-[47.7812px] min-h-0 pl-0 border-gray-700/60 border-b-[1px]">
+                  <td className="py-[13px] pl-[29.25px] pr-[9.75px] text-[13px] font-medium">
+                    <a href="">USA(5)</a>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    <span className="items-center inline-flex px-[6.5px] py-[4.225px] text-[12.35px] font-semibold text-VerdeCustom bg-VerdeCustom/10 rounded-lg">
+                      OK
+                    </span>
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    Chrome - Windows
+                  </td>
+                  <td className="py-[13px] px-[9.75px] text-[13px] font-medium">
+                    236.125.56.98
+                  </td>
+                  <td className="py-[13px] pr-[29.25px] pl-[9.75px] text-[13px] font-medium">
+                    30 mins ago
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   );

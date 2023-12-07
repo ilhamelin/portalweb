@@ -6,6 +6,10 @@ import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
+// CHART
+
+import Graficos_2 from "../../Export/Grafico_2";
+
 // ICONS
 
 import sensor from "../../assets/Views/SENSOR.png";
@@ -39,7 +43,7 @@ const Overview = () => {
     <>
       {/* Encabesado */}
 
-      <div className="flex flex-col bg-secondary-100 pl-[29.25px] pr-[29.25px] pt-[29.25px] pb-0 min-w-0 rounded-xl mb-5 xl:mb-10  text-[14.95px] font-semibold">
+      <div className="flex flex-col  bg-secondary-100 pl-[29.25px] pr-[29.25px] pt-[29.25px] pb-0 min-w-0 rounded-xl mb-5 xl:mb-10 text-[14.95px] font-semibold">
         <div className="flex-1 basis-auto ">
           <div className=" flex flex-wrap sm:flex-nowrap ">
             <div className="mb-[13px] mr-[22.75px]">
@@ -101,7 +105,7 @@ const Overview = () => {
                   </div>
                 </div>
               </div>
-              <div className=" flex flex-wrap justify-between items-center">
+              <div className=" flex flex-wrap justify-between items-center w-auto">
                 <div className="flex flex-col flex-grow pr-8 ">
                   <div className=" flex flex-wrap">
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
@@ -174,7 +178,7 @@ const Overview = () => {
               </div>
             </div>
           </div>
-          <ul className="flex flex-wrap items-stretch border-b-2 border-transparent w-[941px] h-[63px] xl:h-auto xl:w-auto">
+          <ul className="flex flex-wrap items-stretch border-b-2 border-transparent w-auto  xl:w-auto">
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
               <Link
                 to="/Overview"
@@ -200,14 +204,20 @@ const Overview = () => {
               </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
-              <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">
+              <Link
+                to="/Activity"
+                className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary"
+              >
                 Actividad
-              </a>
+              </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
-              <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">
+              <Link
+                to="/Billing"
+                className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary"
+              >
                 Facturacion
-              </a>
+              </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
               <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">
@@ -234,7 +244,7 @@ const Overview = () => {
       </div>
 
       {/* Perfil */}
-      <div className="relative bg-secondary-100 flex flex-col mb-[32.5px] h-[534.125px] min-w-0 rounded-xl font-normal">
+      <div className="relative bg-secondary-100 flex flex-col mb-[32.5px] h-auto min-w-0 rounded-xl font-normal">
         <div className="flex flex-wrap justify-between items-stretch  min-h-[75px] py-0 pl-[29.25px] pr-[29.25px] bg-transparent text-start cursor-pointer">
           <div className="text-gray-500 flex items-center m-0 font-medium text-xl hover:text-gray-400/40">
             <h3 className=" text-white text-[17.55px]">Detalles de Perfil</h3>
@@ -276,7 +286,7 @@ const Overview = () => {
               <span className="text-[13.975px] font-semibold mr-[6.5px]">
                 +569 5824 3917
               </span>
-              <span className="bg-green-600 inline-flex items-center text-center py-[4.225px] px-[6.5px] text-text-xs font-semibold leading-none whitespace-nowrap align-baseline rounded-md">
+              <span className="bg-green-600 inline-flex items-center text-center py-[4.225px] px-[6.5px] text-[11.06px] font-semibold leading-none whitespace-nowrap align-baseline rounded-md">
                 Verificado
               </span>
             </div>
@@ -316,12 +326,12 @@ const Overview = () => {
                 </h4>
                 <div className=" text-gray-400 text-[13.975px]">
                   Your payment was declined. To start using tools, please
-                  <a
+                  <Link
+                    to="/Billing"
                     className="text-blue-500 font-semibold hover:text-blue-400 transition-[.2s] pl-1 "
-                    href=""
                   >
                     Add Payment Methot
-                  </a>
+                  </Link>
                   <span>.</span>
                 </div>
               </div>
@@ -333,7 +343,7 @@ const Overview = () => {
       {/* Top Categorias  */}
 
       <div className=" flex flex-wrap ml-[-16.25px] mr-[-16.25px] mt-[-32.5px] min-w-0 ">
-        <div className=" block basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[801px]">
+        <div className=" block basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[801px] ">
           <div className="bg-secondary-100 relative flex flex-col h-[467.094px] rounded-xl">
             <div className="flex flex-nowrap justify-between mb-0 min-h-[70px] pb-0 px-[29.25px] pt-[16.25px]">
               <h3 className="items-start flex flex-col justify-center my-[6.5px] mr-[6.5px] ml-0">
@@ -348,12 +358,14 @@ const Overview = () => {
             </div>
             <div className="basis-auto flex-grow flex-shrink pb-[26px] pl-[19.5px] pr-[29.25px] pt-[16.25px]">
               <div className="min-h-0">
-                <div className="relative h-[350px] w-[718px]"></div>
+                <div className="relative h-[350px] w-[718px]">
+                  <Graficos_2 />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-secondary-100 basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[495px] rounded-xl">
+        <div className="bg-secondary-100 basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[495px]  rounded-xl">
           <div className="relative flex flex-col h-[477.422] min-w-0">
             <div className="flex basis-auto flex-col flex-grow flex-shrink justify-center py-[26px] px-[29.25px]">
               <div className="mb-[6.5px]">

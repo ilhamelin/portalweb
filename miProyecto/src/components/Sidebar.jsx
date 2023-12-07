@@ -112,7 +112,7 @@ const Sidebar = () => {
         </div>
         <nav>
           <Link
-            to="/"
+            to="/Login"
             className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900"
           >
             <RiLogoutBoxLine className="text-primary" />

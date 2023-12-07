@@ -625,14 +625,20 @@ const Settings = () => {
               </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
-              <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">
+              <Link
+                to="/Activity"
+                className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 hover:text-gray-300 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary"
+              >
                 Actividad
-              </a>
+              </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
-              <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">
+              <Link
+                to="/Billing"
+                className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary"
+              >
                 Facturacion
-              </a>
+              </Link>
             </li>
             <li className="items-stretch mb-[-2px] mt-[6.2px] ">
               <a className="flex items-center mr-[32.5px] py-[16.25px] text-gray-500 text-left border-transparent border-b-2 hover:border-primary transition-colors active:text-primary">

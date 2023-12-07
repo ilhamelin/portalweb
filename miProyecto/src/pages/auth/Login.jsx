@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 //icons React
 import {
@@ -10,11 +10,8 @@ import {
   RiGoogleFill,
 } from "react-icons/ri";
 
-//icons
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl w-auto lg:w-[450px] ">
@@ -30,7 +27,7 @@ const Login = () => {
           <div className="relative mb-4">
             <RiMailLine className=" text-primary w-5 h-5 absolute top-1/2 -translate-y-1/2 left-2  " />
             <input
-              type="Email"
+              type="email"
               className="py-3 pl-8 pr-4 px-4 bg-secondary-900 w-full outline-none rounded-lg focus:border focus:border-primary"
               placeholder="Correo Electronico"
             />

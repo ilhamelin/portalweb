@@ -14,6 +14,8 @@ import Home from "./pages/admin/Home";
 import Settings from "./pages/admin/Settings";
 import Overview from "./pages/admin/Overview";
 import Security from "./pages/admin/Security";
+import Activity from "./pages/admin/Activity";
+import Billing from "./pages/admin/Billing";
 import Chat from "./pages/admin/Chat";
 import Error404 from "./pages/Error404";
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="Settings" element={<Settings />} />
           <Route path="Overview" element={<Overview />} />
           <Route path="Security" element={<Security />} />
+          <Route path="Activity" element={<Activity />} />
+          <Route path="Billing" element={<Billing />} />
           <Route path="chat" element={<Chat />} />
         </Route>
         <Route path="*" element={<Error404 />} />

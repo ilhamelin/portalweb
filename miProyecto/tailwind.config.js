@@ -20,6 +20,8 @@ export default {
         grisCustom2: "#808290",
         grisOscuroCustom: "#636674",
         grisOscuroV2custom: "#9A9CAE",
+        grisCustom3: "#1C1D22",
+        grisCustom4: "15171C",
         rosadoCustom: "#E42855",
         VerdeCustom: "#00A261",
         VerdeCustom2: "#00A761",
@@ -29,6 +31,7 @@ export default {
         AzulOscuro: "#172331",
         RosaIntenso: "#E42855",
         RosaCoral: "#EA868F",
+
         secondary: {
           100: "#1E1F25",
           900: "#131517",

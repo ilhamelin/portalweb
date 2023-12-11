@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 
 // ICONS
@@ -13,6 +14,7 @@ import {
 } from "react-icons/ri";
 import { HiLocationMarker, HiDotsHorizontal } from "react-icons/hi";
 import { IoMdMail } from "react-icons/io";
+import { Result } from "postcss";
 
 // util.js
 
@@ -25,7 +27,8 @@ const Settings = () => {
     const savedImage = localStorage.getItem("profileImage");
     return savedImage;
   });
-  const [setHeaderProfileImage] = useState(profileImage);
+
+  const [headerProfileImage, setHeaderProfileImage] = useState(profileImage);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -35,14 +38,14 @@ const Settings = () => {
 
       reader.onloadend = () => {
         setProfileImage(reader.result);
-        setHeaderProfileImage(reader.result); // Actualiza la imagen de perfil en el encabezado
+        setHeaderProfileImage(reader.result);
       };
 
       if (file.type.startsWith("image")) {
         reader.readAsDataURL(file);
       } else {
         setProfileImage(URL.createObjectURL(file));
-        setHeaderProfileImage(URL.createObjectURL(file)); // Actualiza la imagen de perfil en el encabezado
+        setHeaderProfileImage(URL.createObjectURL(file));
       }
     }
   };
@@ -53,10 +56,6 @@ const Settings = () => {
 
   const [selectedCountry, setSelectedCountry] = useState("");
   const [cities, setCities] = useState([]);
-
-  const [companyName, setCompanyName] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
-  const [website, setWebsite] = useState("");
 
   useEffect(() => {
     const cityList = {
@@ -144,17 +143,14 @@ const Settings = () => {
   ];
 
   const handleDiscard = () => {
-    // Borrar los datos del localStorage
     localStorage.removeItem("formData");
-
-    // Restablecer los estados
     setProfileImage(defaultProfileImage);
     setSelectedCountry("");
     setCities([]);
     setFullName({ firstName: "", lastName: "" });
     setCompanyName("");
     setContactNumber("");
-    setWebsite("");
+    setCompanyWebsite("");
   };
 
   const handleSave = () => {
@@ -165,12 +161,10 @@ const Settings = () => {
       fullName,
       companyName,
       contactNumber,
-      website,
+      companyWebsite,
     };
 
     setProfileImage(profileImage);
-
-    // Guardar en localStorage
     localStorage.setItem("formData", JSON.stringify(formData));
     alert("Datos guardados localmente");
   };
@@ -179,19 +173,17 @@ const Settings = () => {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedFormData = JSON.parse(savedFormData);
-      // Actualizar el estado con los datos recuperados
       setProfileImage(parsedFormData.profileImage);
       setSelectedCountry(parsedFormData.selectedCountry);
       setCities(parsedFormData.cities);
       setFullName(parsedFormData.fullName);
       setCompanyName(parsedFormData.companyName);
       setContactNumber(parsedFormData.contactNumber);
-      setWebsite(parsedFormData.website);
+      setCompanyWebsite(parsedFormData.companyWebsite);
     }
   }, []);
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
-
   const optionsLanguage = [
     {
       label: "Español",
@@ -338,37 +330,22 @@ const Settings = () => {
   };
 
   const actualizarCorreoHandler = () => {
-    // Validaciones adicionales si es necesario
-
-    // Actualizar el correo con el valor del input
     setNuevoCorreo(nuevoCorreoInput);
-
-    // Guardar en el Local Storage
     localStorage.setItem("nuevoCorreo", nuevoCorreoInput);
 
-    // Guardar en el objeto JSON (puedes modificar la estructura según tus necesidades)
     const formData = {
       nuevoCorreo: nuevoCorreoInput,
-      // Otros datos que puedas tener en tu formulario
     };
 
-    // Obtener el objeto JSON actual del Local Storage
     const savedFormData = localStorage.getItem("formData");
     let parsedFormData = savedFormData ? JSON.parse(savedFormData) : {};
-
-    // Actualizar el objeto JSON con los nuevos datos
     parsedFormData.nuevoCorreo = nuevoCorreoInput;
-    // Actualizar otros campos según sea necesario
-
-    // Guardar el objeto JSON actualizado en el Local Storage
     localStorage.setItem("formData", JSON.stringify(parsedFormData));
 
-    // Ocultar el formulario después de la actualización
     setMostrarFormulario(false);
   };
 
   useEffect(() => {
-    // Cargar datos desde el Local Storage al cargar el componente
     const savedNuevoCorreo = localStorage.getItem("nuevoCorreo");
     if (savedNuevoCorreo) {
       setNuevoCorreo(savedNuevoCorreo);
@@ -378,8 +355,7 @@ const Settings = () => {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedFormData = JSON.parse(savedFormData);
-      // Actualizar el estado con los datos recuperados
-      // ... Actualiza otros estados según sea necesario
+      // ... (actualizar otros estados según sea necesario)
     }
   }, []);
 
@@ -400,37 +376,22 @@ const Settings = () => {
   };
 
   const actualizarContrasenaHandler = () => {
-    // Validaciones adicionales si es necesario
-
-    // Actualizar la contraseña con el valor del input
     setNuevaContrasena(nuevaContrasenaInput);
-
-    // Guardar en el Local Storage
     localStorage.setItem("nuevaContrasena", nuevaContrasenaInput);
 
-    // Guardar en el objeto JSON (puedes modificar la estructura según tus necesidades)
     const formData = {
       nuevaContrasena: nuevaContrasenaInput,
-      // Otros datos que puedas tener en tu formulario
     };
 
-    // Obtener el objeto JSON actual del Local Storage
     const savedFormData = localStorage.getItem("formData");
     let parsedFormData = savedFormData ? JSON.parse(savedFormData) : {};
-
-    // Actualizar el objeto JSON con los nuevos datos
     parsedFormData.nuevaContrasena = nuevaContrasenaInput;
-    // Actualizar otros campos según sea necesario
-
-    // Guardar el objeto JSON actualizado en el Local Storage
     localStorage.setItem("formData", JSON.stringify(parsedFormData));
 
-    // Ocultar el formulario después de la actualización
     setMostrarFormulario2(false);
   };
 
   useEffect(() => {
-    // Cargar datos desde el Local Storage al cargar el componente
     const savedNuevaContrasena = localStorage.getItem("nuevaContrasena");
     if (savedNuevaContrasena) {
       setNuevaContrasena(savedNuevaContrasena);
@@ -440,8 +401,7 @@ const Settings = () => {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedFormData = JSON.parse(savedFormData);
-      // Actualizar el estado con los datos recuperados
-      // ... Actualiza otros estados según sea necesario
+      // ... (actualizar otros estados según sea necesario)
     }
   }, []);
 
@@ -449,22 +409,50 @@ const Settings = () => {
   // VALIDACION INPUT //
   // ---------------- //
 
-  const [fullName, setFullName] = useState({ firstName: "", lastName: "" });
+  const [fullName, setFullName] = useState({
+    firstName: "",
+    lastName: "",
+  });
+  const [companyName, setCompanyName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setFullName({
       ...fullName,
       firstName: inputValue,
+      lastName: inputValue,
     });
   };
 
-  const showText = fullName.firstName.trim() === "";
+  const showTextFullName =
+    !fullName.firstName ||
+    !fullName.lastName ||
+    fullName.firstName.trim() === "" ||
+    fullName.lastName.trim() === "";
+  const showTextCompanyName = !companyName || companyName.trim() === "";
+  const showTextContactNumber = !contactNumber || contactNumber.trim() === "";
+  const showTextCompanyWebsite =
+    !companyWebsite || companyWebsite.trim() === "";
+
+  // SUBMENU
+
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    setIsSubMenuOpen(false);
+  };
 
   return (
     <>
       {/* Encabesado */}
 
-      <div className="flex flex-col bg-secondary-100 pl-[29.25px] pr-[29.25px] pt-[29.25px] pb-0 min-w-0 rounded-xl card mb-5 xl:mb-10  text-[14.95px] font-semibold">
+      <div className="flex flex-col h-auto w-auto bg-secondary-100 pl-[29.25px] pr-[29.25px] pt-[29.25px] pb-0 min-w-0 rounded-xl card mb-5 xl:mb-10  text-[14.95px] font-semibold">
         <div className="flex-1 basis-auto ">
           <div className=" flex flex-wrap sm:flex-nowrap ">
             <div className="mb-[13px] mr-[22.75px]">
@@ -519,10 +507,68 @@ const Settings = () => {
                   </a>
 
                   <div className="">
-                    <button className="bg-secondary-900 cursor-pointer rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0 ">
-                      <HiDotsHorizontal className="flex " />
-                    </button>
-                    <div></div>
+                    <div className="relative inline-block">
+                      <button
+                        className="bg-secondary-900 cursor-pointer hover:text-Azul transition-colors rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0"
+                        onClick={handleButtonClick}
+                      >
+                        <HiDotsHorizontal className="flex " />
+
+                        {/* Flecha indicadora */}
+                        {isSubMenuOpen && (
+                          <div className="absolute top-[58px] left-1/2 transform -translate-x-1/2 -translate-y-1">
+                            <div className="w-0 h-0 "></div>
+                            <div className="w-6 h-6 bg-secondary-900 transform rotate-45 absolute -top-2 -left-3"></div>
+                          </div>
+                        )}
+                      </button>
+
+                      {isSubMenuOpen && (
+                        <div className="absolute top-[45px] left-[-160px] mt-[5px] bg-secondary-900 w-[200px] h-auto rounded-lg ">
+                          {/* Contenido del submenú */}
+                          <div className="py-[5px]">
+                            <div className="px-[9.75px] py-[1.95px] text-[12.35px] font-medium text-grisCustom2">
+                              <div className="px-[9.75px] py-[6.5px]">
+                                SubMenu
+                              </div>
+                            </div>
+                            <div
+                              className=" px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Crear Reporte
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Generar informe
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Recursos Humanos
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Configuraciones
+                              </div>
+                            </div>
+                            {/* Agrega más elementos de menú según sea necesario */}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -532,14 +578,13 @@ const Settings = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4000}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -548,14 +593,13 @@ const Settings = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowDownLine className="text-base text-red-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4500}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -564,14 +608,13 @@ const Settings = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={60}
+                          duration={2}
+                          prefix="%"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          %60
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -584,12 +627,13 @@ const Settings = () => {
                     <span className="font-semibold text-inter text-gray-500">
                       Finalización del perfil
                     </span>
-                    <span className="font-bold text-inter">100%</span>
+                    <span className="font-bold text-inter">50%</span>
                   </div>
-                  <div className="h-[5px] mx-3 w-full bg-light mb-3">
+                  <div className="h-[5px] mx-3 w-full bg-light rounded-md mb-3">
                     <div
                       className="bg-green-400 rounded h-[5px]"
                       role="progressbar"
+                      style={{ width: "50%" }}
                       aria-valuenow="50"
                       aria-valuemin="0"
                       aria-valuemax="100"
@@ -665,7 +709,7 @@ const Settings = () => {
       </div>
 
       {/* Perfil */}
-      <div className="relative flex flex-col h-[990.69px] mb-[32.5px] min-w-0 bg-secondary-100 rounded-xl ">
+      <div className="relative flex flex-col  h-auto mb-[32.5px] min-w-0 bg-secondary-100 rounded-xl ">
         <div className="flex flex-wrap justify-between items-stretch  min-h-[75px] py-0 pl-[29.25px] pr-[29.25px] bg-transparent text-start cursor-pointer">
           <div className="text-gray-500 flex items-center m-0 font-medium text-xl hover:text-gray-400/40">
             <h3 className=" text-white text-[17.55px]">Detalles de Perfil</h3>
@@ -727,15 +771,14 @@ const Settings = () => {
                           setFullName({
                             ...fullName,
                             firstName: e.target.value,
-                            handleInputChange,
                           })
                         }
                         className="bg-secondary-900/70 hover:bg-secondary-900 outline-none  rounded-lg text-grisOscuroV2custom block min-h-[45.875px] px-[19.5px] py-[8px] w-[359.5px] text-[14.95px] font-medium"
                       />
                       <div className="mt-[6.5px] block w-[359.5px]">
                         <div>
-                          {showText && (
-                            <p className="text-rosadoCustom text-[12.35px]">
+                          {showTextFullName && !fullName.firstName && (
+                            <p className="text-rosadoCustom text-[12.35px] font-normal">
                               Se requiere un nombre
                             </p>
                           )}
@@ -748,15 +791,18 @@ const Settings = () => {
                         placeholder="Apellido(s)"
                         value={fullName.lastName}
                         onChange={(e) =>
-                          setFullName({
-                            ...fullName,
-                            lastName: e.target.value,
-                          })
+                          setFullName({ ...fullName, lastName: e.target.value })
                         }
                         className="bg-secondary-900/70 hover:bg-secondary-900 outline-none rounded-lg text-grisOscuroV2custom block min-h-[45.875px] px-[19.5px] py-[8px] w-[359.5px] text-[14.95px] font-medium"
                       />
                       <div className="mt-[6.5px] block w-[359.5px]">
-                        <div></div>
+                        <div>
+                          {showTextFullName && !fullName.lastName && (
+                            <p className="text-rosadoCustom text-[12.35px] font-normal">
+                              Se requiere un Apellido
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -777,7 +823,13 @@ const Settings = () => {
                     onChange={(e) => setCompanyName(e.target.value)}
                     className="block min-h-[45.875px] px-[19.5px] py-[8.725px] w-[738.5px] outline-none bg-secondary-900/70 hover:bg-secondary-900 rounded-xl text-grisOscuroV2custom text-[14.95px] font-medium"
                   />
-                  <div className="mt-[6.5px]"></div>
+                  <div className="mt-[6.5px]">
+                    {showTextCompanyName && (
+                      <p className="text-rosadoCustom text-[12.35px] font-normal">
+                        El nombre de la empresa es obligatorio
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-wrap mb-[19.5px] mt-0 mx-[-9.75px]">
@@ -795,7 +847,13 @@ const Settings = () => {
                     onChange={(e) => setContactNumber(e.target.value)}
                     className="block min-h-[45.875px] px-[19.5px] py-[8.725px] w-[738.5px] outline-none bg-secondary-900/70 hover:bg-secondary-900 rounded-xl text-grisOscuroV2custom text-[14.95px] font-medium"
                   />
-                  <div className="mt-[6.5px]"></div>
+                  <div className="mt-[6.5px]">
+                    {showTextContactNumber && (
+                      <p className="text-rosadoCustom text-[12.35px] font-normal">
+                        El número de contacto es obligatorio
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-wrap mb-[19.5px] mt-0 mx-[-9.75px]">
@@ -809,9 +867,17 @@ const Settings = () => {
                   <input
                     type="text"
                     placeholder="Página Web de la compañía"
+                    value={companyWebsite}
+                    onChange={(e) => setCompanyWebsite(e.target.value)}
                     className="block min-h-[45.875px] px-[19.5px] py-[8.725px] w-[738.5px] outline-none bg-secondary-900/70 hover:bg-secondary-900 rounded-xl text-grisOscuroV2custom text-[14.95px] font-medium"
                   />
-                  <div className="mt-[6.5px]"></div>
+                  <div className="mt-[6.5px]">
+                    {showTextCompanyWebsite && (
+                      <p className="text-rosadoCustom text-[12.35px] font-normal">
+                        La página web de la empresa es obligatoria
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-wrap mb-[19.5px] mt-0 mx-[-9.75px]">
@@ -918,13 +984,13 @@ const Settings = () => {
             <hr className=" border-gray-700" />
             <div className="flex justify-end px-[29.25px] py-[19.5px]">
               <button
-                className="bg-secondary-900 text-grisCustom items-start  py-[11.075px] px-[20.5px] mb-0 ml-0 mr-[6.5px] mt-0 rounded-lg hover:bg-blue-500/5 hover:text-blue-500/90 transition-colors "
+                className="bg-secondary-900 text-grisCustom items-start  py-[11.075px] px-[20.5px] mb-0 ml-0 mr-[6.5px] mt-0 rounded-lg hover:bg-blue-500/5 hover:text-blue-500/90 transition-colors  text-[14.3px] leading-[21.45px] font-medium "
                 onClick={handleDiscard}
               >
                 Descartar
               </button>
               <button
-                className="bg-blue-500 text-white items-start  py-[11.075px] px-[20.5px] mb-0 ml-0 mr-[6.5px] mt-0 rounded-lg hover:bg-blue-500/80 transition-colors"
+                className="bg-blue-500 text-white items-start  py-[11.075px] px-[20.5px] mb-0 ml-0 mr-[6.5px] mt-0 rounded-lg hover:bg-blue-500/80 transition-colors text-[14.3px] leading-[21.45px] font-medium "
                 onClick={handleSave}
               >
                 Guardar Cambios
@@ -936,7 +1002,7 @@ const Settings = () => {
 
       {/* Cambio de Contraseña/Correo y restablecer Contraseña/Correo   */}
 
-      <div className="bg-secondary-100 flex flex-col h-[379.359px] mb-[32.5px] min-w-0 relative rounded-xl">
+      <div className="bg-secondary-100 flex flex-col h-auto mb-[32.5px] min-w-0 relative rounded-xl">
         <div className="items-stretch flex flex-wrap justify-between mb-0 min-h-[70px] pb-0 px-[29.25px] pt-0">
           <div className="items-center flex">
             <h3 className="block my-0 mx-0 text-[17.55px] font-semibold text-white">
@@ -972,7 +1038,7 @@ const Settings = () => {
                           Ingrese una nueva dirección de correo electrónico
                         </label>
                         <input
-                          className="min-h-[45.875px] py-[10.725px] pl-[19.5px] pr-[42.575px] w-[100%] bg-secondary-900 rounded-xl"
+                          className="min-h-[45.875px] py-[10.725px] pl-[19.5px] pr-[42.575px] w-[100%] bg-secondary-900 rounded-xl hover:bg-secondary-900/70 transition-colors text-[14.95px] leading-[22.425px] font-medium"
                           type="email"
                           placeholder="Dirección de correo electrónico"
                           value={nuevoCorreoInput}
@@ -990,7 +1056,7 @@ const Settings = () => {
                           confirmar Contraseña
                         </label>
                         <input
-                          className="min-h-[45.875px] py-[10.725px] pl-[19.5px] pr-[42.575px] w-[100%] bg-secondary-900 rounded-xl"
+                          className="min-h-[45.875px] py-[10.725px] pl-[19.5px] pr-[42.575px] w-[100%] bg-secondary-900 rounded-xl hover:bg-secondary-900/70 transition-colors text-[14.95px] leading-[22.425px] font-medium"
                           type="password"
                           name="confirmemailpassword"
                         />
@@ -1004,7 +1070,7 @@ const Settings = () => {
                         e.preventDefault();
                         actualizarCorreoHandler();
                       }}
-                      className="items-start mb-0 ml-0 mr-[6.5px] mt-0 px-[19.5px] py-[11.075px] bg-secondary-900 rounded-lg text-grisCustom hover:bg-secondary-900/70 transition-colors"
+                      className="items-start mb-0 ml-0 mr-[6.5px] mt-0 px-[19.5px] py-[11.075px] bg-blue-500 text-white text-[14.3px] rounded-lg"
                     >
                       Actualizar Correo
                     </button>
@@ -1111,7 +1177,7 @@ const Settings = () => {
                         e.preventDefault();
                         ocultarFormularioHandler2();
                       }}
-                      className="items-start mb-0 ml-0 mr-0 mt-0 px-[19.5px] py-[11.075px] bg-secondary-900 text-grisOscuroCustom text-[14.3px] rounded-lg"
+                      className="items-start mb-0 ml-0 mr-0 mt-0 px-[19.5px] py-[11.075px] bg-secondary-900 rounded-lg text-grisCustom hover:bg-secondary-900/70 transition-colors"
                     >
                       Cancelar
                     </button>

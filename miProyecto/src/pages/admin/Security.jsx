@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 
 // Biblioteca Menu
-import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import "@szhsin/react-menu/dist/index.css";
-import "@szhsin/react-menu/dist/transitions/slide.css";
 
 // SLIDERS
 import Carousel_1 from "../../Export/Carousel_1";
@@ -15,8 +13,8 @@ import Grafico_1 from "../../Export/Grafico_1";
 import Grafico_3 from "../../Export/Grafico_3";
 
 // ICONS REACT}
-import { BiSolidCopy, BiCheck } from "react-icons/bi";
-import { RiEdit2Line } from "react-icons/ri";
+import { BiSolidCopy } from "react-icons/bi";
+
 import { GoVerified } from "react-icons/go";
 import {
   RiAccountCircleFill,
@@ -25,7 +23,6 @@ import {
 } from "react-icons/ri";
 import { HiLocationMarker, HiDotsHorizontal } from "react-icons/hi";
 import { IoMdMail } from "react-icons/io";
-import { BsPatchExclamationFill, BsPatchExclamation } from "react-icons/bs";
 
 const Security = () => {
   const [profileImage, setProfileImage] = useState("");
@@ -68,6 +65,18 @@ const Security = () => {
   useEffect(() => {
     localStorage.setItem("selectedGrafico", graficoActual);
   }, [graficoActual]);
+
+  // SUBMENU
+
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    setIsSubMenuOpen(false);
+  };
 
   return (
     <>
@@ -128,10 +137,68 @@ const Security = () => {
                   </a>
 
                   <div className="">
-                    <button className="bg-secondary-900 cursor-pointer rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0 ">
-                      <HiDotsHorizontal className="flex " />
-                    </button>
-                    <div></div>
+                    <div className="relative inline-block">
+                      <button
+                        className="bg-secondary-900 cursor-pointer hover:text-Azul transition-colors rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0"
+                        onClick={handleButtonClick}
+                      >
+                        <HiDotsHorizontal className="flex " />
+
+                        {/* Flecha indicadora */}
+                        {isSubMenuOpen && (
+                          <div className="absolute top-[58px] left-1/2 transform -translate-x-1/2 -translate-y-1">
+                            <div className="w-0 h-0 "></div>
+                            <div className="w-6 h-6 bg-secondary-900 transform rotate-45 absolute -top-2 -left-3"></div>
+                          </div>
+                        )}
+                      </button>
+
+                      {isSubMenuOpen && (
+                        <div className="absolute top-[45px] left-[-160px] mt-[5px] bg-secondary-900 w-[200px] h-auto rounded-lg ">
+                          {/* Contenido del submenú */}
+                          <div className="py-[5px]">
+                            <div className="px-[9.75px] py-[1.95px] text-[12.35px] font-medium text-grisCustom2">
+                              <div className="px-[9.75px] py-[6.5px]">
+                                SubMenu
+                              </div>
+                            </div>
+                            <div
+                              className=" px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Crear Reporte
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Generar informe
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Recursos Humanos
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Configuraciones
+                              </div>
+                            </div>
+                            {/* Agrega más elementos de menú según sea necesario */}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -141,14 +208,13 @@ const Security = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4000}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -157,14 +223,13 @@ const Security = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowDownLine className="text-base text-red-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4500}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -173,14 +238,13 @@ const Security = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={60}
+                          duration={2}
+                          prefix="%"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          %60
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -193,12 +257,16 @@ const Security = () => {
                     <span className="font-semibold text-inter text-gray-500">
                       Finalización del perfil
                     </span>
-                    <span className="font-bold text-inter">100%</span>
+                    <span className="font-bold text-inter">50%</span>
                   </div>
-                  <div className="h-[5px] mx-3 w-full bg-light mb-3">
+                  <div className="h-[5px] mx-3 w-full bg-light rounded-md mb-3">
                     <div
                       className="bg-green-400 rounded h-[5px]"
                       role="progressbar"
+                      style={{ width: "50%" }}
+                      aria-valuenow="50"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
                     ></div>
                   </div>
                 </div>

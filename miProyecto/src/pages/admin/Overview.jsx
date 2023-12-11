@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 
 // Biblioteca Menu
-import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import "@szhsin/react-menu/dist/index.css";
-import "@szhsin/react-menu/dist/transitions/slide.css";
 
 // CHART
 
@@ -25,7 +23,7 @@ import {
 } from "react-icons/ri";
 import { HiLocationMarker, HiDotsHorizontal } from "react-icons/hi";
 import { IoMdMail } from "react-icons/io";
-import { BsPatchExclamationFill, BsPatchExclamation } from "react-icons/bs";
+import { BsPatchExclamationFill } from "react-icons/bs";
 
 // FUNCIONES
 const Overview = () => {
@@ -38,6 +36,18 @@ const Overview = () => {
       setProfileImage(parsedFormData.profileImage);
     }
   }, []);
+
+  // SUBMENU
+
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    setIsSubMenuOpen(false);
+  };
 
   return (
     <>
@@ -98,10 +108,68 @@ const Overview = () => {
                   </a>
 
                   <div className="">
-                    <button className="bg-secondary-900 cursor-pointer rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0 ">
-                      <HiDotsHorizontal className="flex " />
-                    </button>
-                    <div></div>
+                    <div className="relative inline-block">
+                      <button
+                        className="bg-secondary-900 cursor-pointer hover:text-Azul hover:transition-colors rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0 "
+                        onClick={handleButtonClick}
+                      >
+                        <HiDotsHorizontal className="flex " />
+
+                        {/* Flecha indicadora */}
+                        {isSubMenuOpen && (
+                          <div className="absolute top-[58px] left-1/2 transform -translate-x-1/2 -translate-y-1">
+                            <div className="w-0 h-0 "></div>
+                            <div className="w-6 h-6 bg-secondary-900 transform rotate-45 absolute -top-2 -left-3"></div>
+                          </div>
+                        )}
+                      </button>
+
+                      {isSubMenuOpen && (
+                        <div className="absolute top-[45px] left-[-160px] mt-[5px] bg-secondary-900 w-[200px] h-auto rounded-lg ">
+                          {/* Contenido del submenú */}
+                          <div className="py-[5px]">
+                            <div className="px-[9.75px] py-[1.95px] text-[12.35px] font-medium text-grisCustom2">
+                              <div className="px-[9.75px] py-[6.5px]">
+                                SubMenu
+                              </div>
+                            </div>
+                            <div
+                              className=" px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Crear Reporte
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Generar informe
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Recursos Humanos
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Configuraciones
+                              </div>
+                            </div>
+                            {/* Agrega más elementos de menú según sea necesario */}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -111,14 +179,13 @@ const Overview = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4000}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -127,14 +194,13 @@ const Overview = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowDownLine className="text-base text-red-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4500}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -143,14 +209,13 @@ const Overview = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={60}
+                          duration={2}
+                          prefix="%"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          %60
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -163,12 +228,13 @@ const Overview = () => {
                     <span className="font-semibold text-inter text-gray-500">
                       Finalización del perfil
                     </span>
-                    <span className="font-bold text-inter">100%</span>
+                    <span className="font-bold text-inter">50%</span>
                   </div>
-                  <div className="h-[5px] mx-3 w-full bg-light mb-3">
+                  <div className="h-[5px] mx-3 w-full bg-light rounded-md mb-3">
                     <div
                       className="bg-green-400 rounded h-[5px]"
                       role="progressbar"
+                      style={{ width: "50%" }}
                       aria-valuenow="50"
                       aria-valuemin="0"
                       aria-valuemax="100"
@@ -344,7 +410,7 @@ const Overview = () => {
 
       <div className=" flex flex-wrap ml-[-16.25px] mr-[-16.25px] mt-[-32.5px] min-w-0 ">
         <div className=" block basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[801px] ">
-          <div className="bg-secondary-100 relative flex flex-col h-[467.094px] rounded-xl">
+          <div className="bg-secondary-100 relative flex flex-col h-auto rounded-xl">
             <div className="flex flex-nowrap justify-between mb-0 min-h-[70px] pb-0 px-[29.25px] pt-[16.25px]">
               <h3 className="items-start flex flex-col justify-center my-[6.5px] mr-[6.5px] ml-0">
                 <span className="flex-wrap my-0 ml-0 mr-[9.75px] text-[16.575px] font-semibold ">
@@ -354,11 +420,10 @@ const Overview = () => {
                   8k de Reportes
                 </span>
               </h3>
-              <div>Qui tiene que expresarse el ChartComponent</div>
             </div>
             <div className="basis-auto flex-grow flex-shrink pb-[26px] pl-[19.5px] pr-[29.25px] pt-[16.25px]">
               <div className="min-h-0">
-                <div className="relative h-[350px] w-[718px]">
+                <div className="relative h-auto w-auto">
                   <Graficos_2 />
                 </div>
               </div>
@@ -366,7 +431,7 @@ const Overview = () => {
           </div>
         </div>
         <div className="bg-secondary-100 basis-auto flex-grow-0 flex-shrink-0 my-[32.5px] max-w-[100%] px-[16.25px] w-[495px]  rounded-xl">
-          <div className="relative flex flex-col h-[477.422] min-w-0">
+          <div className="relative flex flex-col h-auto min-w-0">
             <div className="flex basis-auto flex-col flex-grow flex-shrink justify-center py-[26px] px-[29.25px]">
               <div className="mb-[6.5px]">
                 <h1 className="mb-[6.5px] mt-0 font-medium text-[22.75px] text-center text-gray-400">
@@ -408,7 +473,7 @@ const Overview = () => {
 
       <div className="flex flex-wrap ml-[-16.25px] mr-[-16.25px] mt-[-32.5px] mb-4">
         <div className=" block basis-auto flex-grow-0 flex-shrink-0 mt-[32.5px] max-w-[100%] px-[16.25px] w-[450.828px]">
-          <div className="bg-secondary-100 relative flex flex-col h-[592.438px] min-w-0 rounded-xl">
+          <div className="bg-secondary-100 relative flex flex-col h-auto min-w-0 rounded-xl">
             <div className="flex flex-wrap items-stretch justify-between mb-0 min-h-[70px] pb-[0px] px-[29.25px] pt-[22.75px]">
               <h3 className="items-start flex flex-col justify-center my-[6.5px] mr-[6.5px] ml-[0px] font-medium">
                 <span className="flex-wrap my-0 mr-[9.75px] ml-[0px] text-[16.575px] font-semibold text-white text-start">
@@ -428,7 +493,7 @@ const Overview = () => {
             {/* BODY */}
 
             <div className="basis-auto flex-grow flex-shrink px-[29.25px] py-[26px]">
-              <div className="relative h-[415px] mr-[-19.5px] overflow-y-scroll pr-[19.5px]">
+              <div className="relative h-[455px] mr-[-19.5px] overflow-y-scroll pr-[19.5px]">
                 <div className="relative flex flex-col h-[592.438px] min-w-0">
                   <div className="block border-dotted border-2 mb-[19.5px] py-[9.75px] px-[22.75px] border-gray-500">
                     <div className="flex items-center justify-between mb-[9.75px]">
@@ -699,7 +764,7 @@ const Overview = () => {
                           60%
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 tewtext-white600">
                             Funcionando
                           </span>
                         </td>
@@ -718,7 +783,7 @@ const Overview = () => {
                           40%
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 tewtext-white600">
                             Funcionando
                           </span>
                         </td>
@@ -738,7 +803,7 @@ const Overview = () => {
                           10%
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 text-gray-600 ">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 twtext-white-600 ">
                             En Reparacion
                           </span>
                         </td>
@@ -758,7 +823,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-white">
                             Suspendido
                           </span>
                         </td>
@@ -778,7 +843,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 tewtext-white600">
                             Funcionando
                           </span>
                         </td>
@@ -798,7 +863,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 twtext-white-600">
                             En Reparacion
                           </span>
                         </td>
@@ -818,7 +883,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 twtext-white-600">
                             En Reparacion
                           </span>
                         </td>
@@ -838,7 +903,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-green-500 tewtext-white600">
                             Funcionando
                           </span>
                         </td>
@@ -858,7 +923,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-yellow-500 twtext-white-600">
                             En Reparacion
                           </span>
                         </td>
@@ -878,7 +943,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-white">
                             Suspendido
                           </span>
                         </td>
@@ -898,7 +963,7 @@ const Overview = () => {
                           Bateria
                         </td>
                         <td className="h-[31.8434px] min-h-0 py-[9.75px] pr-[9.75px] pl-0">
-                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-gray-600">
+                          <span className="items-center inline-flex px-[14px] py-[8.15px] text-[12px] font-semibold rounded-lg  bg-red-500 text-white">
                             Suspendido
                           </span>
                         </td>

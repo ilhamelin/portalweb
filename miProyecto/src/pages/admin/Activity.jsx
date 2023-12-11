@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 
 // ICONS REACT}
@@ -11,10 +12,10 @@ import {
 } from "react-icons/ri";
 import { HiLocationMarker, HiDotsHorizontal, HiFlag } from "react-icons/hi";
 import { IoMdMail, IoIosLink } from "react-icons/io";
-import { IoLayers, IoMailSharp } from "react-icons/io5";
+import { IoLayers } from "react-icons/io5";
 import { FaRegCalendarAlt, FaPencilAlt, FaFileCode } from "react-icons/fa";
 import { LiaComment } from "react-icons/lia";
-import { BsPatchExclamationFill, BsFileEarmarkCodeFill } from "react-icons/bs";
+import { BsFileEarmarkCodeFill } from "react-icons/bs";
 
 const Activity = () => {
   // Cambio de Imagen Perfil
@@ -27,6 +28,21 @@ const Activity = () => {
       setProfileImage(parsedFormData.profileImage);
     }
   }, []);
+
+  // SUBMENU
+
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    // Maneja la acción cuando se hace clic en un elemento del submenú
+    // Puedes realizar alguna acción específica aquí
+    setIsSubMenuOpen(false); // Cierra el submenú después de hacer clic en un elemento
+  };
+
   return (
     <>
       {/* Encabesado */}
@@ -85,10 +101,68 @@ const Activity = () => {
                   </a>
 
                   <div className="">
-                    <button className="bg-secondary-900 cursor-pointer rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0 ">
-                      <HiDotsHorizontal className="flex " />
-                    </button>
-                    <div></div>
+                    <div className="relative inline-block">
+                      <button
+                        className="bg-secondary-900 cursor-pointer hover:text-Azul transition-colors rounded-md inline-flex items-center h-[37.75px] w-[34.8125px] justify-center py-0 pl-0 pr-0"
+                        onClick={handleButtonClick}
+                      >
+                        <HiDotsHorizontal className="flex " />
+
+                        {/* Flecha indicadora */}
+                        {isSubMenuOpen && (
+                          <div className="absolute top-[58px] left-1/2 transform -translate-x-1/2 -translate-y-1">
+                            <div className="w-0 h-0 "></div>
+                            <div className="w-6 h-6 bg-secondary-900 transform rotate-45 absolute -top-2 -left-3"></div>
+                          </div>
+                        )}
+                      </button>
+
+                      {isSubMenuOpen && (
+                        <div className="absolute top-[45px] left-[-160px] mt-[5px] bg-secondary-900 w-[200px] h-auto rounded-lg ">
+                          {/* Contenido del submenú */}
+                          <div className="py-[5px]">
+                            <div className="px-[9.75px] py-[1.95px] text-[12.35px] font-medium text-grisCustom2">
+                              <div className="px-[9.75px] py-[6.5px]">
+                                SubMenu
+                              </div>
+                            </div>
+                            <div
+                              className=" px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Crear Reporte
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Generar informe
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Recursos Humanos
+                              </div>
+                            </div>
+                            <div
+                              className="px-[9.75px] py-[1.95px] w-auto h-auto"
+                              onClick={handleMenuItemClick}
+                            >
+                              <div className="px-[9.75px] py-[8.45px] hover:bg-Azul/10 text-grisCustom hover:text-Azul text-[13px] font-medium text-start rounded-md cursor-pointer">
+                                Configuraciones
+                              </div>
+                            </div>
+                            {/* Agrega más elementos de menú según sea necesario */}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -98,14 +172,13 @@ const Activity = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4000}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -114,14 +187,13 @@ const Activity = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowDownLine className="text-base text-red-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={4500}
+                          duration={2}
+                          prefix="$"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          $4.500
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -130,14 +202,13 @@ const Activity = () => {
                     <div className="border border-gray-300/30 border-dashed rounded min-w-[125px] py-[9.75px] px-[13px] me-6 mb-[9.75px] mr-[19.5px]">
                       <div className="flex items-center ">
                         <RiArrowUpLine className="text-base text-green-500 me-2" />
-                        <div
+                        <CountUp
+                          start={0}
+                          end={60}
+                          duration={2}
+                          prefix="%"
                           className="text-xl"
-                          data-kt-countup="true"
-                          data-kt-countup-value="4500"
-                          data-kt-countup-prefix="$"
-                        >
-                          %60
-                        </div>
+                        />
                       </div>
                       <div className="font-semibold text-inter text-gray-500/75">
                         Ganancias
@@ -150,12 +221,16 @@ const Activity = () => {
                     <span className="font-semibold text-inter text-gray-500">
                       Finalización del perfil
                     </span>
-                    <span className="font-bold text-inter">100%</span>
+                    <span className="font-bold text-inter">50%</span>
                   </div>
-                  <div className="h-[5px] mx-3 w-full bg-light mb-3">
+                  <div className="h-[5px] mx-3 w-full bg-light rounded-md mb-3">
                     <div
                       className="bg-green-400 rounded h-[5px]"
                       role="progressbar"
+                      style={{ width: "50%" }}
+                      aria-valuenow="50"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
                     ></div>
                   </div>
                 </div>
@@ -228,7 +303,7 @@ const Activity = () => {
       </div>
 
       {/* Linea de Actividades */}
-      <div className="flex flex-col h-[1399.28px] min-w-0 relative bg-secondary-100 rounded-xl">
+      <div className="flex flex-col h-auto min-w-0 relative bg-secondary-100 rounded-xl mb-5">
         <div className="items-stretch flex flex-wrap justify-between mb-0 min-h-[70px] py-[0px] px-[29.25px]  border-gray-700/60 border-b-[1px]">
           <div className="items-center flex my-[6.5px] ml-0 mr-[6.5px] ">
             <FaRegCalendarAlt className="flex mr-[9.75px] relative text-blue-500 text-[22.75px] font-normal" />

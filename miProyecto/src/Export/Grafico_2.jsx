@@ -67,7 +67,7 @@ const Grafico_2 = () => {
 
   return (
     <>
-      <div className="bg-secondary-100 p-6 rounded-lg h-[350px] w-[718px] text-white">
+      <div className="bg-secondary-100 p-6 rounded-lg h-auto w-auto text-white">
         <div className="relative">
           <Line data={data} options={options} />
         </div>

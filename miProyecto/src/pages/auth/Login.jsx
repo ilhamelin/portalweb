@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //icons React
 import {
@@ -12,6 +12,9 @@ import {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  // CONEXION BASE DE DATOS
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl w-auto lg:w-[450px] ">
@@ -28,7 +31,7 @@ const Login = () => {
             <RiMailLine className=" text-primary w-5 h-5 absolute top-1/2 -translate-y-1/2 left-2  " />
             <input
               type="email"
-              className="py-3 pl-8 pr-4 px-4 bg-secondary-900 w-full outline-none rounded-lg focus:border focus:border-primary"
+              className="border-none py-3 pl-8 pr-4 px-4 bg-secondary-900 w-full outline-none rounded-lg focus:border focus:border-primary"
               placeholder="Correo Electronico"
             />
           </div>
@@ -52,14 +55,12 @@ const Login = () => {
             )}
           </div>
           <div>
-            <Link to="/">
-              <button
-                type="submit"
-                className="bg-primary text-white uppercase font-bold text-sm w-full py-3 px-4 rounded-lg hover:text-gray-100 transition-colors"
-              >
-                Ingresar
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="bg-primary text-white uppercase font-bold text-sm w-full py-3 px-4 rounded-lg hover:text-gray-100 transition-colors"
+            >
+              Ingresar
+            </button>
           </div>
         </form>
         <div className="flex flex-col items-center gap-4 text-gray-100">

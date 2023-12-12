@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/AuthContext";
 
 //icons React
 import {
@@ -13,7 +15,18 @@ import {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  // CONEXION BASE DE DATOS
+  // LOGICA LOGIN / BACKEND
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { signin } = useAuth();
+
+  const onSubmit = handleSubmit((data) => {
+    signin(data);
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -22,23 +35,30 @@ const Login = () => {
           Iniciar{" "}
           <span className="text-sunsetOrange border-b py-2">sesion</span>
         </h1>
-        <form className="mb-8">
-          <button className="flex items-center justify-center py-3 px-4 gap-4 bg-secondary-900 w-full text-center rounded-full mb-8 text-gray-100">
+        <form className="mb-8" onSubmit={onSubmit}>
+          {/* <button className="flex items-center justify-center py-3 px-4 gap-4 bg-secondary-900 w-full text-center rounded-full mb-8 text-gray-100">
             <RiGoogleFill className=" text-primary w-6 h-6" />
             Ingresar con Google
-          </button>
+          </button> */}
           <div className="relative mb-4">
             <RiMailLine className=" text-primary w-5 h-5 absolute top-1/2 -translate-y-1/2 left-2  " />
             <input
               type="email"
+              {...register("email", { required: true })}
               className="border-none py-3 pl-8 pr-4 px-4 bg-secondary-900 w-full outline-none rounded-lg focus:border focus:border-primary"
               placeholder="Correo Electronico"
             />
           </div>
+          {errors.email && (
+            <p className="text-RojoCustom text-[12px] font-medium leading-[22px] my-2">
+              Correo es requerido
+            </p>
+          )}
           <div className="relative mb-4">
             <RiLockLine className=" text-primary w-5 h-5 absolute top-1/2 -translate-y-1/2 left-2 " />
             <input
               type={showPassword ? "text" : "password"}
+              {...register("password", { required: true })}
               className="py-3 px-8 bg-secondary-900 w-full outline-none rounded-lg focus:border focus:border-primary"
               placeholder="Contraseña"
             />
@@ -54,9 +74,14 @@ const Login = () => {
               />
             )}
           </div>
+          {errors.password && (
+            <p className="text-RojoCustom text-[12px] font-medium leading-[22px]">
+              Contraseña es requerido
+            </p>
+          )}
           <div>
             <button
-              type="button"
+              type="submit"
               className="bg-primary text-white uppercase font-bold text-sm w-full py-3 px-4 rounded-lg hover:text-gray-100 transition-colors"
             >
               Ingresar

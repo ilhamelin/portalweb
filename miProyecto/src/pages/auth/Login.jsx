@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 
@@ -22,11 +22,16 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signin } = useAuth();
+  const { signin, isAuthenticated, errors: signinErrors } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -35,6 +40,14 @@ const Login = () => {
           Iniciar{" "}
           <span className="text-sunsetOrange border-b py-2">sesion</span>
         </h1>
+        {signinErrors.map((error, i) => (
+          <div
+            className="bg-RojoCustom p-2 text-white rounded-lg my-[15px] text-center "
+            key={i}
+          >
+            {error}
+          </div>
+        ))}
         <form className="mb-8" onSubmit={onSubmit}>
           {/* <button className="flex items-center justify-center py-3 px-4 gap-4 bg-secondary-900 w-full text-center rounded-full mb-8 text-gray-100">
             <RiGoogleFill className=" text-primary w-6 h-6" />
@@ -88,6 +101,7 @@ const Login = () => {
             </button>
           </div>
         </form>
+
         <div className="flex flex-col items-center gap-4 text-gray-100">
           <Link
             to="/olvide-password"

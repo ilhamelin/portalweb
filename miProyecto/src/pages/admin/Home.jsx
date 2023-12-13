@@ -20,7 +20,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="w-auto h-auto">
       <iframe
         title="Grafico Datos"
         width="1270"
@@ -29,6 +29,7 @@ const Home = () => {
         src="https://app.powerbi.com/reportEmbed?reportId=0c07897b-d71a-40e5-974f-77ae5d7dadf6&autoAuth=true&ctid=72fd0b5a-8a6a-4cff-89f6-bde961f7e250"
         allowFullScreen={false}
         style={iframeStyles}
+        className="w-full  "
         onMouseOver={handleHover}
         onMouseOut={handleLeave}
       ></iframe>

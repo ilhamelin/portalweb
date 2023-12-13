@@ -17,6 +17,7 @@ import {
 } from "react-icons/ri";
 
 import { VscBell, VscCalendar } from "react-icons/vsc";
+import { useAuth } from "../context/AuthContext";
 
 //icons
 
@@ -30,6 +31,9 @@ const Header = () => {
       setProfileImage(parsedFormData.profileImage);
     }
   }, []);
+
+  const { user } = useAuth();
+  console.log(user);
 
   return (
     <header className=" h-[7vh] md:h-[10vh] border-b border-secondary-100 p-8 flex items-center justify-end font-sans text-inter">
@@ -121,7 +125,7 @@ const Header = () => {
                 src={profileImage}
                 className="w-6 h-6 object-cover rounded-full"
               />
-              <span>Benjamin Reyes</span>
+              <span>{user.username}</span>
               <RiArrowDownSLine />
             </MenuButton>
           }
@@ -138,10 +142,8 @@ const Header = () => {
                 className="w-8 h-8 object-cover rounded-full"
               />
               <div className="flex flex-col gap-1 text-sm">
-                <span className="text-sm">Benjamin Reyes</span>
-                <span className="text-xs text-gray-500">
-                  be.reyes@duocuc.cl
-                </span>
+                <span className="text-sm">{user.username}</span>
+                <span className="text-xs text-gray-500">{user.email}</span>
               </div>
             </Link>
           </MenuItem>

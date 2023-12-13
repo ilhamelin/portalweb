@@ -12,12 +12,24 @@ import {
   RiArrowRightSLine,
 } from "react-icons/ri";
 import { MdSupportAgent, MdOutlineAnalytics } from "react-icons/md";
+import { BsListTask } from "react-icons/bs";
+import { useAuth } from "../context/AuthContext";
 
 //icons
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSubmenu, setShowSubmenu] = useState(false);
+
+  const [showSubmenu_2, setShowSubmenu_2] = useState(false);
+
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  const { logout } = useAuth();
 
   return (
     <>
@@ -108,12 +120,63 @@ const Sidebar = () => {
                 <RiCalendarTodoLine className="text-primary" /> Calendario
               </Link>
             </li>
+
+            <li>
+              <button
+                onClick={() => setShowSubmenu_2(!showSubmenu_2)}
+                className="flex items-center justify-between gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
+              >
+                <span className="flex items-center gap-4">
+                  <BsListTask className="text-primary" /> Tareas
+                </span>
+                <RiArrowRightSLine
+                  className={` mt-1 ${
+                    showSubmenu_2 && "rotate-90"
+                  } transition-all `}
+                />
+              </button>
+              <ul
+                className={` ${
+                  showSubmenu_2 ? "h-auto" : "h-0"
+                } overflow-y-hidden transition-all `}
+              >
+                <li>
+                  <Link
+                    to="/tasks"
+                    onClick={() => handleItemClick(1)}
+                    className={`py-2 px-4 border-l border-gray-500 ml-6 block relative ${
+                      selectedItem === 1
+                        ? "before:w-3 before:h-3 before:absolute before:bg-primary before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors"
+                        : "before:w-3 before:h-3 before:absolute before:bg-gray-500 before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors"
+                    }`}
+                  >
+                    Ver Tareas
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/task/:id"
+                    onClick={() => handleItemClick(2)}
+                    className={`py-2 px-4 border-l border-gray-500 ml-6 block relative ${
+                      selectedItem === 2
+                        ? "before:w-3 before:h-3 before:absolute before:bg-primary before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors"
+                        : "before:w-3 before:h-3 before:absolute before:bg-gray-500 before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors"
+                    }`}
+                  >
+                    Crear Tareas
+                  </Link>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
         <nav>
           <Link
-            to="/Login"
+            to="/login"
             className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900"
+            onClick={() => {
+              logout();
+            }}
           >
             <RiLogoutBoxLine className="text-primary" />
             Cerrar Sesion
